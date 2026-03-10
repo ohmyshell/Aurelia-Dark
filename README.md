@@ -22,49 +22,27 @@ On **OLED displays**, Aurelia Dark looks especially sharp.
 
 ## Installation
 
-Aurelia Dark is designed for **Omarchy Hyprland** and comes with an automated installation script that configures all components.
+Aurelia Dark is designed for **Omarchy Hyprland** and can be installed directly with the standard `omarchy-theme-install` utility.
 
 ### Quick Install — One Command
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/TshiSelle/Aurelia-Dark/main/install.sh)
+omarchy-theme-install https://github.com/ohmyshell/aurelia-dark.git
 ```
 
 This command will:
 
-- Clone the theme repository (if not already installed)
-- Deploy theme files to Omarchy
-- Configure system hooks
-- Install all wallpapers
-- Apply the theme automatically
-- Verify the installation
+- Clone the theme repository to `~/.config/omarchy/themes/aurelia-dark`
+- Apply the theme automatically via `omarchy-theme-set`
 
-### Manual Installation Steps
+### Walker Menu
 
-**Step 1:** Clone the repository
-
-```bash
-git clone https://github.com/TshiSelle/Aurelia-Dark.git ~/.config/omarchy/themes/aurelia-dark
-```
-
-**Step 2:** Run the installation script
-
-```bash
-~/.config/omarchy/themes/aurelia-dark/install.sh
-```
-
-**Step 3:** The theme will apply automatically. Enjoy!
-
-### Alternative — Walker Menu
-
-If you prefer using Omarchy’s built-in theme installer:
+You can also install through Omarchy’s built-in theme installer:
 
 1. Open **Walker**: `SUPER + ALT + SPACE`
 2. Navigate to: **Install → Style → Theme**
-3. Paste: `https://github.com/TshiSelle/Aurelia-Dark.git`
+3. Paste: `https://github.com/ohmyshell/aurelia-dark.git`
 4. Press **Enter**
-
-Note: Using the custom `install.sh` script ensures all components (wallpapers, hooks, styling) are properly configured.
 
 ---
 
@@ -176,20 +154,6 @@ For full feature support, these are recommended but not required:
 
 Want to use a different color scheme? Aurelia Dark makes it easy!
 
-#### Interactive Color Customizer
-
-Run the color customizer script for an interactive experience:
-
-```bash
-~/.config/omarchy/themes/aurelia-dark/customize-colors.sh
-```
-
-This provides:
-- **Change individual colors** — accent, background, foreground
-- **Preset palettes** — Catppuccin, Nord, Dracula, Sunset, and more
-- **Easy hex input** — just paste in your favorite color codes
-- **Instant preview** — apply changes and see results immediately
-
 #### Manual Color Editing
 
 Edit colors directly in `colors.toml`:
@@ -299,14 +263,14 @@ You can also change icons through Walker:
 
 The wallpapers should appear automatically after installation. If they don't:
 
-1. Check that backgrounds are in the correct location:
+1. Verify the backgrounds are present in the theme directory:
    ```bash
-   ls ~/.config/omarchy/backgrounds/aurelia-dark/
+   ls ~/.config/omarchy/current/theme/backgrounds/
    ```
 
-2. If empty, manually copy them:
+2. If empty, re-apply the theme to copy them:
    ```bash
-   cp ~/.config/omarchy/themes/aurelia-dark/backgrounds/*.jpg ~/.config/omarchy/backgrounds/aurelia-dark/
+   omarchy-theme-set aurelia-dark
    ```
 
 3. Refresh Walker or restart it with `pkill -f walker`
@@ -321,22 +285,12 @@ If components like Waybar or Walker aren't showing the theme colors:
    ```
    Should output: `aurelia-dark`
 
-2. Trigger the theme-set hook:
+2. Re-apply the theme:
    ```bash
-   ~/.config/omarchy/hooks/theme-set aurelia-dark
+   omarchy-theme-set aurelia-dark
    ```
 
 3. Restart the affected application
-
-### GTK applications still show wrong colors
-
-The theme includes GTK CSS overrides. To apply them manually:
-
-```bash
-~/.config/omarchy/hooks/theme-set aurelia-dark
-```
-
-Then restart GTK applications (GNOME Settings, Files, etc.)
 
 ---
 
@@ -368,17 +322,6 @@ yay -S aether
 ```
 
 ---
-
-## What the Installation Script Does
-
-The `install.sh` script automates the complete theme installation:
-
-1. **Theme Deployment** — Copies all theme files to Omarchy
-2. **System Hooks** — Sets up the `theme-set` hook for GTK CSS integration
-3. **Wallpaper Installation** — Configures all included backgrounds for Walker's Style menu
-4. **Dependency Verification** — Ensures Omarchy is properly installed
-5. **Theme Application** — Automatically activates the theme
-6. **Verification** — Confirms successful installation
 
 ## What Aurelia Dark Changes
 
@@ -418,7 +361,6 @@ The result is a **cohesive, premium Omarchy desktop aesthetic** with consistent 
 
 ```
 aurelia-dark/
-├── install.sh                  # Automated installation script
 ├── colors.toml                 # Core color palette (template source)
 ├── README.md                   # This file
 ├── preview.png                 # Theme preview image
@@ -453,7 +395,7 @@ aurelia-dark/
     └── ... (up to 43 images)
 ```
 
-The `install.sh` script handles deploying these files to their correct system locations and setting up the necessary hooks.
+All files are picked up automatically by `omarchy-theme-set` when the theme is applied.
 
 ---
 
